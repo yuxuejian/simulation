@@ -1,0 +1,19 @@
+<beans xmlns="http://www.springframework.org/schema/beans">
+    <bean id="user" class="com.iocaop.simulation.User">
+        <property name="id" value="1"/>
+        <property name="name" value="张三"/>
+        <property name="age" value="23"/>
+        <property name="roleId" value="1"/>
+    </bean>
+
+    <bean id="userService" class="com.iocaop.simulation.UserServiceImpl"/>
+
+    <bean id="logInterceptor" class="com.iocaop.simulation.LogInterceptor"/>
+
+    <bean id="autoProxyCreator" class="com.iocaop.simulation.aop.weaving.AspectJAwareAdvisorAutoProxyCreator"/>
+
+    <bean id="userServiceAspect" class="com.iocaop.simulation.aop.aspect.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="logInterceptor"/>
+        <property name="expression" value="execution(* com.iocaop.simulation.UserService.*(..))"/>
+    </bean>
+</beans>
